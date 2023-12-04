@@ -8,7 +8,8 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html # Follow regular flow of Rails
-      format.text { render partial: "movies/list", locals: {movies: @movies}, formats: [:html] }
+      @html_content = render_to_string partial: 'movies/list', locals: { movies: @movies }, formats: [:html]
+      format.json { render json: { html: @html_content } }
     end
   end
 
